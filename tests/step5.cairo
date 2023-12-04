@@ -1,14 +1,14 @@
-use starknet::{ ContractAddress, account::Call };
-use aa::account::{ IAccountDispatcher, IAccountDispatcherTrait, SUPPORTED_TX_VERSION };
+use starknet::{ContractAddress, account::Call};
+use aa::account::{IAccountDispatcher, IAccountDispatcherTrait, SUPPORTED_TX_VERSION};
 use snforge_std::signature::StarkCurveKeyPairTrait;
-use snforge_std::{ start_prank, stop_prank, start_spoof, stop_spoof };
-use super::utils::{ deploy_contract, create_tx_info_mock };
+use snforge_std::{start_prank, stop_prank, start_spoof, stop_spoof};
+use super::utils::{deploy_contract, create_tx_info_mock};
 
 #[test]
 fn validate_declare_by_protocol_succeeds() {
     let mut signer = StarkCurveKeyPairTrait::from_private_key(123);
     let contract_address = deploy_contract(signer.public_key);
-    let dispatcher = IAccountDispatcher{ contract_address };
+    let dispatcher = IAccountDispatcher { contract_address };
 
     let tx_hash_mock = 123;
     let tx_version_mock = SUPPORTED_TX_VERSION::DECLARE;
@@ -29,7 +29,7 @@ fn validate_declare_by_protocol_succeeds() {
 fn validate_declare_by_non_protocol_fails() {
     let mut signer = StarkCurveKeyPairTrait::from_private_key(123);
     let contract_address = deploy_contract(signer.public_key);
-    let dispatcher = IAccountDispatcher{ contract_address };
+    let dispatcher = IAccountDispatcher { contract_address };
 
     let tx_hash_mock = 123;
     let tx_version_mock = SUPPORTED_TX_VERSION::DECLARE;
@@ -49,7 +49,7 @@ fn validate_declare_by_non_protocol_fails() {
 fn validate_deploy_by_protocol_succeeds() {
     let mut signer = StarkCurveKeyPairTrait::from_private_key(123);
     let contract_address = deploy_contract(signer.public_key);
-    let dispatcher = IAccountDispatcher{ contract_address };
+    let dispatcher = IAccountDispatcher { contract_address };
 
     let tx_hash_mock = 123;
     let tx_version_mock = SUPPORTED_TX_VERSION::DEPLOY_ACCOUNT;
@@ -71,7 +71,7 @@ fn validate_deploy_by_protocol_succeeds() {
 fn validate_deploy_by_non_protocol_fails() {
     let mut signer = StarkCurveKeyPairTrait::from_private_key(123);
     let contract_address = deploy_contract(signer.public_key);
-    let dispatcher = IAccountDispatcher{ contract_address };
+    let dispatcher = IAccountDispatcher { contract_address };
 
     let tx_hash_mock = 123;
     let tx_version_mock = SUPPORTED_TX_VERSION::DEPLOY_ACCOUNT;
