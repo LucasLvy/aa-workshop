@@ -26,7 +26,9 @@ mod Account {
             self.public_key.read()
         }
 
-        fn is_valid_signature(self: @ContractState, hash: felt252, signature: Array<felt252>) -> felt252 {
+        fn is_valid_signature(
+            self: @ContractState, hash: felt252, signature: Array<felt252>
+        ) -> felt252 {
             let is_valid_length = signature.len() == 2_u32;
             if !is_valid_length {
                 return 0;
@@ -34,7 +36,11 @@ mod Account {
             let is_valid = check_ecdsa_signature(
                 hash, self.public_key.read(), *signature.at(0_u32), *signature.at(1_u32)
             );
-            if is_valid { VALIDATED } else { 0 }
+            if is_valid {
+                VALIDATED
+            } else {
+                0
+            }
         }
     }
 }
