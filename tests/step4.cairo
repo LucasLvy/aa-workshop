@@ -1,14 +1,14 @@
-use starknet::{ ContractAddress, account::Call };
-use aa::account::{ IAccountDispatcher, IAccountDispatcherTrait };
+use starknet::{ContractAddress, account::Call};
+use aa::account::{IAccountDispatcher, IAccountDispatcherTrait};
 use snforge_std::signature::StarkCurveKeyPairTrait;
-use snforge_std::{ start_prank, stop_prank, start_spoof, stop_spoof };
-use super::utils::{ deploy_contract, create_call_array_mock, create_tx_info_mock };
+use snforge_std::{start_prank, stop_prank, start_spoof, stop_spoof};
+use super::utils::{deploy_contract, create_call_array_mock, create_tx_info_mock};
 
 #[test]
 fn protocol_invoke_succeeds() {
     let mut signer = StarkCurveKeyPairTrait::from_private_key(123);
     let contract_address = deploy_contract(signer.public_key);
-    let dispatcher = IAccountDispatcher{ contract_address };
+    let dispatcher = IAccountDispatcher { contract_address };
 
     let tx_hash_mock = 123;
     let tx_version_mock = 1;
@@ -29,7 +29,7 @@ fn protocol_invoke_succeeds() {
 fn non_protocol_invoke_fails() {
     let mut signer = StarkCurveKeyPairTrait::from_private_key(123);
     let contract_address = deploy_contract(signer.public_key);
-    let dispatcher = IAccountDispatcher{ contract_address };
+    let dispatcher = IAccountDispatcher { contract_address };
 
     let tx_hash_mock = 123;
     let tx_version_mock = 1;
